@@ -45,15 +45,7 @@ public class Post extends Model<Post> implements Serializable{
     }
     
     public int getPostCount(int id) {
-        int count = 0;
-        
-        for (Post p : model) {
-            if (p.userId == id) {
-                count++;
-            }
-        }
-        
-        return count;
+        return getUserPost(id).size();
     }
     
     public LinkedList<Post> getByBoard(String board) {

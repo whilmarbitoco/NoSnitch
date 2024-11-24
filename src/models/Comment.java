@@ -27,16 +27,34 @@ public class Comment extends Model<Comment> implements Serializable{
         this.comment = comment;
         this.date = LocalDate.now();
     }
-   
-    public int getCommentCount(int id) {
-        int count = 0;
+    
+    public LinkedList<Comment> getPostComment(int postId) {
+        LinkedList<Comment> res = new LinkedList<>();
         
-        for (Comment com : model) {
-            if (com.userId == id) {
-                count++;
+        for (Comment c : model) {
+            if (c.postId == postId) {
+                res.add(c);
             }
         }
-        return count;
+        
+        return res;
+    }
+    
+    public LinkedList<Comment> getUserComment(int userId) {
+        LinkedList<Comment> res = new LinkedList<>();
+        
+        for (Comment c : model) {
+            if (c.userId == userId) {
+                res.add(c);
+            }
+        }
+        
+        return res;
+    }
+    
+   
+    public int getCommentCount(int userId) {
+        return getUserComment(userId).size();
     }
     
 }

@@ -1,47 +1,43 @@
 package controllers;
 
-import javax.swing.JOptionPane;
+import core.Auth;
+import core.Prompt;
 import models.Models;
-import models.Post;
 import models.User;
-import views.LoginView;
 import views.SignUpView;
 
 
-public class SignupController {
-    Models models;
-    SignUpView signupView;
+public class SignupController extends Controller<SignUpView>{
 
-    public SignupController(Models models, SignUpView signupView) {
-        this.models = models;
-        this.signupView = signupView;
+    public SignupController(Models model) {
+        models = model;
+        view = new SignUpView();
         
         init();
     }
     
-    public void init() {
-        signupView.setController(this);
-        signupView.setLocationRelativeTo(null);
-        signupView.setVisible(true);
+    private void init() {
+        view.setController(this);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
     }
     
     public void signup(String email, String username, String password, String confirmPassword) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-
-        if (!email.matches(emailRegex)) {
-            JOptionPane.showMessageDialog(signupView, "Invalid Email", "Sign Up Failed", JOptionPane.ERROR_MESSAGE);
+        
+        if (!Auth.validateEmail(email)) {
+            Prompt.error(view, "Invalid Email", "Sign Up Failed");            
             return;   
         }
         
         User checkUser = models.user.getByEmail(email);
         
         if (checkUser != null) {
-            JOptionPane.showMessageDialog(signupView, "Email Already Exist", "Sign Up Failed", JOptionPane.ERROR_MESSAGE);
+            Prompt.error(view, "Email Already Exist", "Sign Up Failed");
             return;
         }
         
         if (!password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(signupView, "Password Do Not Match", "Sign Up Failed", JOptionPane.ERROR_MESSAGE);
+            Prompt.error(view,  "Password Do Not Match", "Sign Up Failed");
             return;
         }
         
@@ -49,13 +45,13 @@ public class SignupController {
         
         
         models.user.add(user);
-        JOptionPane.showMessageDialog(signupView, "Account Created", "Sign Up Success", JOptionPane.INFORMATION_MESSAGE);
+        Prompt.information(view, "Account Created", "Sign Up Success");
         
         gotoLogin();
     }
     
     public void gotoLogin() {
-        new LoginController(models, new LoginView());
-        signupView.dispose();
+        new LoginController(models);
+        view.dispose();
     }
 }

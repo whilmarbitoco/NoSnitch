@@ -1,60 +1,56 @@
 package controllers;
 
-import javax.swing.JOptionPane;
+import core.Auth;
+import core.Prompt;
 import models.Models;
-import models.Post;
 import models.User;
-import views.HomeView;
 import views.LoginView;
-import views.SignUpView;
 
-public class LoginController {
+public class LoginController extends Controller<LoginView>{
     
-    Models models;
-    LoginView loginView;
 
-    public LoginController(Models models, LoginView loginView) {
-        this.models = models;
-        this.loginView = loginView;
+    public LoginController(Models model) {
+        models = model;
+        view = new LoginView();
         init();
     }    
     
-    public void init() {
-        loginView.setController(this);
-        loginView.setLocationRelativeTo(null);
-        loginView.setVisible(true);
+    private void init() {
+        view.setController(this);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
     }
     
     public void login(String email, String password) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         
-        if (!email.matches(emailRegex)) {
-            JOptionPane.showMessageDialog(loginView, "Invalid Email", "Login Failed", JOptionPane.ERROR_MESSAGE);
+        if (!Auth.validateEmail(email)) {
+            Prompt.error(view, "Invalid Email", "Login Failed");
             return;   
         }
         
         User user = models.user.getByEmail(email);
         if (user == null) {
-            JOptionPane.showMessageDialog(loginView, "User Does Not Exist", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            Prompt.error(view, "User Does Not Exist", "Login Failed");
             return;
         }
         
         if (!user.password.equals(password)) {
-            JOptionPane.showMessageDialog(loginView, "Invalid Username or Password", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            Prompt.error(view, "Invalid Username or Password", "Login Failed");
             return;
         }
-        
+        Prompt.information(view, "Welcome to NoSnitch", "Login Success");
         gotoHome(user);
 
     }
     
     public void gotoHome(User user) {
-        new HomeController(models, user);
-        loginView.dispose();
+        Auth.setUser(user);
+        new HomeController(models);
+        view.dispose();
     }
 
     public void gotoSignUp() {
-        new SignupController(models, new SignUpView());
-        loginView.dispose();
+        new SignupController(models);
+        view.dispose();
     }
 }

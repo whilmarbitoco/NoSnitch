@@ -32,6 +32,7 @@ public class PostView extends javax.swing.JPanel {
         post = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(229, 229, 229));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMaximumSize(new java.awt.Dimension(930, 100));
         setPreferredSize(new java.awt.Dimension(400, 100));
 

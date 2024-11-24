@@ -1,44 +1,47 @@
 package controllers;
 
-import javax.swing.JOptionPane;
+import core.Auth;
+import core.Prompt;
+import models.Models;
 import models.Post;
 import views.CreatePostView;
 import views.HomeView;
 
 
 
-public class CreatePostController {
-    CreatePostView createPostView;
+public class CreatePostController extends Controller<CreatePostView> {
     HomeView parent;
-    HomeController homeController;
+    Runnable run;
 
-    public CreatePostController(CreatePostView createPostView, HomeView parent, HomeController homeController) {
-        this.createPostView = createPostView;
+    public CreatePostController(HomeView parent, Models model) {
+        models = model;
+        view = new CreatePostView();
         this.parent = parent;
-        this.homeController = homeController;
         
         init();
     }
     
-    public void init() {
-        this.createPostView.setController(this);
-        this.createPostView.setLocationRelativeTo(parent);
-        this.createPostView.setVisible(true);
+    private void init() {
+        this.view.setController(this);
+        this.view.setLocationRelativeTo(parent);
+        this.view.setVisible(true);
+    }
+    
+    public void update(Runnable func) {
+        this.run = func;
     }
     
     public void createPost(String board, String post) {
         if (post.length() > 80) {
-            JOptionPane.showMessageDialog(createPostView, "Post is limited to 80 characters only", "Cannot Post", JOptionPane.ERROR_MESSAGE);
+            Prompt.error(view, "Post is limited to 80 characters only", "Cannot Post");
             return;
         }
-        
-        System.out.println(board);
-        System.out.println(post);
-        JOptionPane.showMessageDialog(createPostView, "Post Created", "Post Success", JOptionPane.INFORMATION_MESSAGE);
-
-        Post newPost = new Post(0, null, board, post);
-        homeController.updatePost(newPost);
-        this.createPostView.dispose();
+       
+        Post newPost = new Post(Auth.user.id, Auth.anon, board, post);
+        models.post.add(newPost);
+        run.run();
+        Prompt.information(view, "Post Created", "Post Success");
+        this.view.dispose();
     }
     
 }

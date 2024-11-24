@@ -73,10 +73,18 @@ public class HomeView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         scroll = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
         setName("login"); // NOI18N
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         container.setBackground(new java.awt.Color(229, 229, 229));
 
@@ -476,6 +484,14 @@ public class HomeView extends javax.swing.JFrame {
         // TODO add your handling code here:
         controller.changeBoard("all");
     }//GEN-LAST:event_general1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        controller.exit(this);
+    }//GEN-LAST:event_formWindowClosing
 
 
 

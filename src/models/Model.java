@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+
 public class Model<T extends Model> implements Serializable{
     
     LinkedList<T> model;
@@ -76,6 +77,6 @@ public class Model<T extends Model> implements Serializable{
     }
 
     private String getPath() {
-        return System.getProperty("user.dir") + "/src/models/data/" + modelName + ".txt";
+        return System.getProperty("user.dir") + "/src/models/data/" + modelName + ".ser";
     }
 }

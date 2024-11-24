@@ -63,10 +63,15 @@ public class CommentsView extends javax.swing.JFrame {
         commentInput = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
         setName("login"); // NOI18N
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         container.setBackground(new java.awt.Color(229, 229, 229));
 
@@ -115,7 +120,7 @@ public class CommentsView extends javax.swing.JFrame {
         jLabel2.setText("BOARDS");
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("FreeSans", 0, 18)); // NOI18N
+        jButton2.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("General");
         jButton2.setBorder(null);
@@ -130,7 +135,7 @@ public class CommentsView extends javax.swing.JFrame {
         });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("FreeSans", 0, 18)); // NOI18N
+        jButton3.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Love");
         jButton3.setBorder(null);
@@ -145,7 +150,7 @@ public class CommentsView extends javax.swing.JFrame {
         });
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setFont(new java.awt.Font("FreeSans", 0, 18)); // NOI18N
+        jButton4.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("School");
         jButton4.setBorder(null);
@@ -160,7 +165,7 @@ public class CommentsView extends javax.swing.JFrame {
         });
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setFont(new java.awt.Font("FreeSans", 0, 18)); // NOI18N
+        jButton5.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Art");
         jButton5.setBorder(null);
@@ -175,7 +180,7 @@ public class CommentsView extends javax.swing.JFrame {
         });
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setFont(new java.awt.Font("FreeSans", 0, 18)); // NOI18N
+        jButton6.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Announcement");
         jButton6.setBorder(null);
@@ -384,23 +389,23 @@ public class CommentsView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        controller.changeBoard("general");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        controller.changeBoard("love");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        controller.changeBoard("school");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        controller.changeBoard("art");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        controller.changeBoard("announcement");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
@@ -411,6 +416,10 @@ public class CommentsView extends javax.swing.JFrame {
         controller.createComment(commentInput.getText());
         commentInput.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        controller.exit(this);
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
