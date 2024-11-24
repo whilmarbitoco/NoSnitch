@@ -46,6 +46,7 @@ public class HomeController extends Controller<HomeView>{
     public void updatePost() {
         view.setBoardName("board/all");
         setPost(models.post.getAll());
+        setInfo();
     }
     
     public void gotoComment(Post post) {

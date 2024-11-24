@@ -12,12 +12,11 @@ public class Comment extends Model<Comment> implements Serializable{
     public int userId;
     public int anonId;
     public String comment;
-    public LocalDate date;
 
     public Comment() {
         super();
         modelName = "Comment";
-        load();
+        clean();
     }
 
     public Comment(int postId, int userId, int anonId, String comment) {
@@ -25,7 +24,7 @@ public class Comment extends Model<Comment> implements Serializable{
         this.userId = userId;
         this.anonId = anonId;
         this.comment = comment;
-        this.date = LocalDate.now();
+        date = LocalDate.now();
     }
     
     public LinkedList<Comment> getPostComment(int postId) {

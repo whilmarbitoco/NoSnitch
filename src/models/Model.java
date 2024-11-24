@@ -51,6 +51,21 @@ public class Model<T extends Model> implements Serializable{
         return (int) (Math.random() * Integer.MAX_VALUE) & 3872;
     }
     
+    public void clean() {
+        load();
+        LocalDate now = LocalDate.now();
+        LinkedList<T> cleaned = new LinkedList<>();
+
+        for (T p : model) {
+            if (!p.date.isBefore(now.minusDays(2))) {
+                cleaned.add(p);
+            }
+        }
+        model.clear();
+        model = cleaned;
+        save();
+    }
+    
     public void save() {
         try (ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(getPath()))) {
             for (T data : model) {
@@ -74,7 +89,7 @@ public class Model<T extends Model> implements Serializable{
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Note: Serialized File Not Found For " + modelName);
         }
     }
 
