@@ -1,11 +1,12 @@
 
 package core;
 
-import models.Model;
+import models.Session;
 import models.User;
 
 public class Auth {
     
+    public static Session userSession;
     public static User user;
     public static String anon;
     public static int anonId;
@@ -16,8 +17,14 @@ public class Auth {
         setAnon(anonId);
     }
     
+    
     private static void setAnon(int id) {
         anon = "Anonymous#" + Integer.toString(id);
+    }
+    
+    public static Session session() {
+        userSession = new Session();
+        return userSession;
     }
     
     public static boolean validateEmail(String email) {

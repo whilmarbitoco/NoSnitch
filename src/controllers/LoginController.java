@@ -16,10 +16,15 @@ public class LoginController extends Controller<LoginView>{
     }    
     
     private void init() {
+        if (Auth.session().getSession() != null) {
+            gotoHome(Auth.session().getSession().user);
+            return;
+        }
         view.setController(this);
         view.setLocationRelativeTo(null);
         view.setVisible(true);
     }
+    
     
     public void login(String email, String password) {
         

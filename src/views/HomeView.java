@@ -490,7 +490,7 @@ public class HomeView extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        controller.exit(this);
+        controller.exit(this, 1);
     }//GEN-LAST:event_formWindowClosing
 
 

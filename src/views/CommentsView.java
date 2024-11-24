@@ -418,7 +418,7 @@ public class CommentsView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        controller.exit(this);
+        controller.exit(this, 1);
     }//GEN-LAST:event_formWindowClosing
 
 

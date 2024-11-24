@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 
@@ -15,6 +16,7 @@ public class Model<T extends Model> implements Serializable{
     LinkedList<T> model;
     public String modelName;
     public int id;
+    public LocalDate date;
     
     public Model() {
         this.model = new LinkedList<>();

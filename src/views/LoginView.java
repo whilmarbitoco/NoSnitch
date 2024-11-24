@@ -224,7 +224,7 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        controller.exit(this);
+        controller.exit(this, 0);
     }//GEN-LAST:event_formWindowClosing
 
 

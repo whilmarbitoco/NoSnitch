@@ -15,7 +15,6 @@ public class Post extends Model<Post> implements Serializable{
     public String anon;
     public String post;
     public String board;
-    public LocalDate date;
 
     public Post() {
         super();
