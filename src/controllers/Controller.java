@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import models.Models;
 
 
-public class Controller<T extends JFrame> {
+abstract class Controller<T extends JFrame> {
     
     Models models;
     T view;
@@ -31,7 +31,23 @@ public class Controller<T extends JFrame> {
         }
         Auth.session().deleteSession();
         new LoginController(models);
-        this.view.dispose();
+        view.dispose();
+    }
+    
+    public void listenCombo(String item) {
+        if(item.equalsIgnoreCase(Auth.user.username)) {
+            System.out.println("Profile");
+            return;
+        } 
+        
+        if (item.equals("Settings")) {
+            new SettingsController(models);
+            view.dispose();
+            return;
+        } 
+        if (item.equalsIgnoreCase("Logout")) {
+            logout();
+        }
     }
     
 }

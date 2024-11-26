@@ -1,52 +1,42 @@
 package views;
 
-import controllers.HomeController;
-import javax.swing.ComboBoxModel;
+import controllers.SettingsController;
+import core.Auth;
+import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
-import models.Post;
 
 
-public class HomeView extends javax.swing.JFrame {
+public class SettingsView extends javax.swing.JFrame {
 
-    HomeController controller;
+    SettingsController controller;
+    int buttonState = 0;
     
-    public HomeView() {
+    public SettingsView() {
         initComponents();
-    }
-
-    public void setController(HomeController controller) {
-        this.controller = controller;
-    }
-    
-    public void setData(String username, String anonymousId, String post, String comment) {
-        this.username.setText(username);
-        this.anonymousId.setText(anonymousId);
-        this.post.setText(post);
-        this.comment.setText(comment);
+        this.cancel.setVisible(false);
         
-        String[] items = {username, "Settings", "Logout"};
+        username.setText(Auth.user.username);
+        email.setText(Auth.user.email);
+        disableInput();
+        
+        String[] items = {Auth.user.username, "Settings", "Logout"};
         DefaultComboBoxModel comboModel = new DefaultComboBoxModel(items);
         combo.setModel(comboModel);
-
     }
 
-    public void addPost(Post p) {
-            PostView postData = new PostView(p);
-            postData.setController(this.controller);
-            scroll.add(postData);
-            scroll.revalidate();
-            scroll.repaint();
-    }
+    public void setController(SettingsController controller) {
+        this.controller = controller;
+    } 
     
-    public void setBoardName(String name) {
-        this.boardName.setText(name);
-    }
+    public void disableInput() {
+        email.disable();
+        username.disable();
+    } 
     
-    public void clear() {
-        scroll.removeAll();
-        scroll.revalidate();
-        scroll.repaint();
-    }
+    public void enableInput() {
+        email.enable();
+        username.enable();
+    } 
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -64,20 +54,19 @@ public class HomeView extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         general1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        boardName = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        username = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        anonymousId = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        username = new javax.swing.JTextField();
+        edit = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        post = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        comment = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        scroll = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        changePass = new javax.swing.JLabel();
+        logout = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
@@ -100,7 +89,7 @@ public class HomeView extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("NoSnitch");
 
-        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "wb2c0", "Settings", "Logout" }));
+        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboActionPerformed(evt);
@@ -115,7 +104,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -127,7 +116,7 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(33, 33, 33))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -284,112 +273,126 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(40, 40, 40))
         );
 
-        jButton1.setBackground(new java.awt.Color(76, 64, 255));
-        jButton1.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Create New Note");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setText("Personal Information");
+
+        email.setBackground(new java.awt.Color(255, 255, 255));
+        email.setForeground(new java.awt.Color(0, 0, 0));
+        email.setText("Email");
+
+        jLabel4.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setText("Email");
+
+        jLabel5.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setText("Username");
+
+        username.setBackground(new java.awt.Color(255, 255, 255));
+        username.setForeground(new java.awt.Color(0, 0, 0));
+        username.setText("Username");
+
+        edit.setBackground(new java.awt.Color(153, 153, 153));
+        edit.setFont(new java.awt.Font("FreeSans", 1, 13)); // NOI18N
+        edit.setForeground(new java.awt.Color(255, 255, 255));
+        edit.setText("Edit");
+        edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                editActionPerformed(evt);
             }
         });
 
-        boardName.setBackground(new java.awt.Color(51, 51, 51));
-        boardName.setFont(new java.awt.Font("FreeSans", 1, 13)); // NOI18N
-        boardName.setForeground(new java.awt.Color(51, 51, 51));
-        boardName.setText("board/all");
+        cancel.setBackground(new java.awt.Color(153, 153, 153));
+        cancel.setFont(new java.awt.Font("FreeSans", 1, 13)); // NOI18N
+        cancel.setForeground(new java.awt.Color(255, 255, 255));
+        cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        username.setFont(new java.awt.Font("FreeSans", 1, 24)); // NOI18N
-        username.setForeground(new java.awt.Color(0, 0, 0));
-        username.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        username.setText("wb2c0");
-
-        jLabel4.setText("You are currently knows as");
-
-        anonymousId.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
-        anonymousId.setForeground(new java.awt.Color(0, 0, 0));
-        anonymousId.setText("Anonymous#2043");
-
-        jLabel6.setFont(new java.awt.Font("FreeSans", 0, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("You have:");
+        jLabel6.setText("Security");
 
-        post.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        post.setForeground(new java.awt.Color(0, 0, 0));
-        post.setText("18");
-        post.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        changePass.setFont(new java.awt.Font("FreeSans", 0, 13)); // NOI18N
+        changePass.setForeground(new java.awt.Color(51, 51, 51));
+        changePass.setText("Change Password");
+        changePass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changePass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                changePassMouseClicked(evt);
+            }
+        });
 
-        jLabel8.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel8.setText("Posts");
+        logout.setFont(new java.awt.Font("FreeSans", 0, 13)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 0, 51));
+        logout.setText("Logout");
+        logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMouseClicked(evt);
+            }
+        });
 
-        jLabel9.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Comments");
-
-        comment.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
-        comment.setForeground(new java.awt.Color(0, 0, 0));
-        comment.setText("10");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(comment, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel9))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8))))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(anonymousId)
-                                .addComponent(jLabel4)))
-                        .addGap(0, 36, Short.MAX_VALUE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(username)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logout)
+                    .addComponent(changePass)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(anonymousId)
+                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(post)
-                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comment)
-                    .addComponent(jLabel9))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(changePass)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logout)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        scroll.setLayout(new javax.swing.BoxLayout(scroll, javax.swing.BoxLayout.PAGE_AXIS));
-        jScrollPane1.setViewportView(scroll);
+        jLabel1.setFont(new java.awt.Font("FreeSans", 0, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Settings");
 
         javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
         container.setLayout(containerLayout);
@@ -399,14 +402,11 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(containerLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
-                    .addComponent(boardName)
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
+                .addGap(18, 18, 18)
+                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(381, Short.MAX_VALUE))
         );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,17 +415,14 @@ public class HomeView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(containerLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(boardName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(272, Short.MAX_VALUE))
                     .addGroup(containerLayout.createSequentialGroup()
-                        .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 266, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -462,10 +459,6 @@ public class HomeView extends javax.swing.JFrame {
         controller.changeBoard("announcement");
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       controller.createPost();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void generalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generalMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_generalMouseClicked
@@ -487,38 +480,71 @@ public class HomeView extends javax.swing.JFrame {
         controller.exit(this, 1);
     }//GEN-LAST:event_formWindowClosing
 
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
+        controller.logout();
+    }//GEN-LAST:event_logoutMouseClicked
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+        if (buttonState == 0) {
+            enableInput();
+            cancel.setVisible(true);
+            edit.setText("Update");
+            edit.setBackground(new Color(0,51,204));
+            buttonState = 1;
+            return;
+        } 
+        disableInput();
+        cancel.setVisible(false);
+        edit.setText("Edit");
+        edit.setBackground(new Color(153,153,153));
+        buttonState = 0;
+        controller.update(username.getText(), email.getText());
+
+    }//GEN-LAST:event_editActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        disableInput();
+        cancel.setVisible(false);
+        edit.setText("Edit");
+        edit.setBackground(new Color(153,153,153));
+        buttonState = 0;
+    }//GEN-LAST:event_cancelActionPerformed
+
     private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
         controller.listenCombo(combo.getSelectedItem().toString());
     }//GEN-LAST:event_comboActionPerformed
 
+    private void changePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePassMouseClicked
+        controller.changePassword();
+    }//GEN-LAST:event_changePassMouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel anonymousId;
-    private javax.swing.JLabel boardName;
+    private javax.swing.JButton cancel;
+    private javax.swing.JLabel changePass;
     private javax.swing.JComboBox<String> combo;
-    private javax.swing.JLabel comment;
     private javax.swing.JPanel container;
+    private javax.swing.JButton edit;
+    private javax.swing.JTextField email;
     private javax.swing.JButton general;
     private javax.swing.JButton general1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel post;
-    private javax.swing.JPanel scroll;
-    private javax.swing.JLabel username;
+    private javax.swing.JLabel logout;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

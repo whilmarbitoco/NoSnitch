@@ -33,6 +33,12 @@ public class LoginController extends Controller<LoginView>{
             return;   
         }
         
+        if (!Auth.validatePassword(password)) {
+            Prompt.error(view, "Password must be 4 characters long", "Login Failed");            
+            return;   
+        }
+        
+        
         User user = models.user.getByEmail(email);
         if (user == null) {
             Prompt.error(view, "User Does Not Exist", "Login Failed");

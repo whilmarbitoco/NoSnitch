@@ -32,7 +32,13 @@ public class CreatePostController extends Controller<CreatePostView> {
     }
     
     public void createPost(String board, String post) {
-        if (post.length() > 80) {
+        
+        if (post.isEmpty()) {
+            Prompt.error(view, "Post cannot be empty", "Cannot Post");
+            return;
+        }
+        
+        if (Auth.validateText(80, post)) {
             Prompt.error(view, "Post is limited to 80 characters only", "Cannot Post");
             return;
         }

@@ -6,26 +6,23 @@ import models.Comment;
 import models.Models;
 import models.Post;
 import views.CommentsView;
-import views.HomeView;
 
 
 public class CommentController extends Controller<CommentsView>{
     
-    HomeView parent;
     Post post;
 
-    public CommentController(Post post, HomeView parent, Models model) {
+    public CommentController(Post post, Models model) {
         models = model;
         view = new CommentsView();
         this.post = post;
-        this.parent = parent;
         init();
     }
     
     private void init() {
         this.view.setController(this);
         this.view.setData(post);
-        this.view.setLocationRelativeTo(parent);
+        this.view.setLocationRelativeTo(null);
         initComments();
         this.view.setVisible(true);
 
@@ -43,10 +40,17 @@ public class CommentController extends Controller<CommentsView>{
     }
     
     public void createComment(String comment) {
-        if (comment.length() > 50) {
-            Prompt.error(view, "COmment is limited to 50 characters only", "Cannot Comment");
+        
+        if (comment.isEmpty()) {
+            Prompt.error(view, "Comment cannot be empty", "Cannot Comment");
             return;
         }
+        
+        if (Auth.validateText(50, comment)) {
+            Prompt.error(view, "Comment is limited to 50 characters only", "Cannot Comment");
+            return;
+        }
+        
         Comment newComment = new Comment(post.id, Auth.user.id, Auth.anonId, comment);
         models.comment.add(newComment);
         this.view.setComments(newComment, Auth.anon);

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 
-public class Model<T extends Model> implements Serializable{
+abstract class Model<T extends Model> implements Serializable{
     
     LinkedList<T> model;
     public String modelName;
@@ -43,6 +43,16 @@ public class Model<T extends Model> implements Serializable{
         return null;
     }
     
+    public boolean updateById(int id, T update) {
+        T current = getById(id);
+        if (current == null) {
+            return false;
+        }
+        model.set(model.indexOf(current), update);
+        save();
+        return true;
+    }
+    
     public LinkedList<T> getAll() {
         return this.model;
     }
@@ -54,15 +64,13 @@ public class Model<T extends Model> implements Serializable{
     public void clean() {
         load();
         LocalDate now = LocalDate.now();
-        LinkedList<T> cleaned = new LinkedList<>();
 
         for (T p : model) {
-            if (!p.date.isBefore(now.minusDays(2))) {
-                cleaned.add(p);
+            if (!p.date.isAfter(now.minusDays(2))) {
+                model.remove(p);
+                System.out.println("lol");
             }
         }
-        model.clear();
-        model = cleaned;
         save();
     }
     
@@ -89,11 +97,12 @@ public class Model<T extends Model> implements Serializable{
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Note: Serialized File Not Found For " + modelName);
+            System.err.println("Note: Serialized File Not Found For Model: " + modelName);
         }
     }
 
     private String getPath() {
         return System.getProperty("user.dir") + "/src/models/data/" + modelName + ".ser";
     }
+    
 }

@@ -252,12 +252,17 @@ public class SignUpView extends javax.swing.JFrame {
 
     private void usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusGained
         // TODO add your handling code here:
+        if (username.getText().equals("Enter Username")) {
+            username.setText("");
+        }
     }//GEN-LAST:event_usernameFocusGained
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        // TODO add your handling code here:
+        if (username.getText().equals("")) {
+            username.setText("Enter Username");
+        }
     }//GEN-LAST:event_usernameFocusLost
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         controller.signup(email.getText(), username.getText(), password.getText(), confirmPassword.getText());
     }//GEN-LAST:event_jButton1ActionPerformed

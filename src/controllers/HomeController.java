@@ -12,7 +12,6 @@ public class HomeController extends Controller<HomeView>{
     public HomeController(Models model) {
         models = model;
         view = new HomeView();
-
         init();
         this.setPost(models.post.getAll());
     }
@@ -50,7 +49,7 @@ public class HomeController extends Controller<HomeView>{
     }
     
     public void gotoComment(Post post) {
-        new CommentController(post,view, models);
+        new CommentController(post, models);
         this.view.dispose();
     }
     

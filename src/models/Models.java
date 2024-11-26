@@ -10,6 +10,7 @@ public class Models {
         this.post = new Post();
         this.user = new User();
         this.comment = new Comment();
+        System.out.println(user);
     }
     
 }

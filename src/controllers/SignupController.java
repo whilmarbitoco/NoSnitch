@@ -29,6 +29,11 @@ public class SignupController extends Controller<SignUpView>{
             return;   
         }
         
+        if (!Auth.validatePassword(password)) {
+            Prompt.error(view, "Password must be 4 characters long", "Sign Up Failed");            
+            return;   
+        }
+        
         User checkUser = models.user.getByEmail(email);
         
         if (checkUser != null) {
