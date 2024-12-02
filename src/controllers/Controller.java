@@ -4,6 +4,7 @@ import core.Auth;
 import core.Prompt;
 import javax.swing.JFrame;
 import models.Models;
+import models.Post;
 
 
 abstract class Controller<T extends JFrame> {
@@ -34,9 +35,15 @@ abstract class Controller<T extends JFrame> {
         view.dispose();
     }
     
+    public void gotoComment(Post post) {
+        new CommentController(post, models);
+        this.view.dispose();
+    }
+    
     public void listenCombo(String item) {
         if(item.equalsIgnoreCase(Auth.user.username)) {
-            System.out.println("Profile");
+            new ProfileController(models);
+            view.dispose();
             return;
         } 
         

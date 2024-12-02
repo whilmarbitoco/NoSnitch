@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/controllers/SettingsController.java</file>
-            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/controllers/SignupController.java</file>
-            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/controllers/ChangePassController.java</file>
-            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/views/ChangePassView.java</file>
-            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/controllers/Controller.java</file>
+            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/controllers/ProfileController.java</file>
+            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/views/MyPostView.java</file>
+            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/models/Model.java</file>
+            <file>file:/home/wb2c0/NetBeansProjects/NoSnitch/src/views/EditPostView.java</file>
         </group>
     </open-files>
 </project-private>

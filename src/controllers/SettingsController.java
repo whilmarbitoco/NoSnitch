@@ -20,7 +20,7 @@ public class SettingsController extends Controller<SettingsView>{
         view.setVisible(true);
     }
      
-       public void changeBoard(String board) {
+    public void changeBoard(String board) {
         new HomeController(models).changeBoard(board);
         view.dispose();
     }

@@ -23,6 +23,7 @@ public class User extends Model<User> implements Serializable{
         this.password = password;
     }
     
+    
     public User getByEmail(String email) {
         for (User user : model) {
             if (user.email.equals(email)) {

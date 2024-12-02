@@ -47,12 +47,7 @@ public class HomeController extends Controller<HomeView>{
         setPost(models.post.getAll());
         setInfo();
     }
-    
-    public void gotoComment(Post post) {
-        new CommentController(post, models);
-        this.view.dispose();
-    }
-    
+        
     
     public void changeBoard(String board) {
         view.setBoardName("board/"+board);

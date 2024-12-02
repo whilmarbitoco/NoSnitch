@@ -43,6 +43,16 @@ abstract class Model<T extends Model> implements Serializable{
         return null;
     }
     
+    public boolean deleteById(int id) {
+        T current = getById(id);
+        if (current == null) {
+            return false;
+        }
+        model.remove(current);
+        save();
+        return true;
+    }
+    
     public boolean updateById(int id, T update) {
         T current = getById(id);
         if (current == null) {
@@ -58,7 +68,7 @@ abstract class Model<T extends Model> implements Serializable{
     }
     
     public int generateId() {
-        return (int) (Math.random() * Integer.MAX_VALUE) & 3872;
+        return (int) (Math.random() * Integer.MAX_VALUE) % 3872;
     }
     
     public void clean() {
