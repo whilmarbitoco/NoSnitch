@@ -53,7 +53,7 @@ public class Comment extends Model<Comment> implements Serializable{
     }
     
     public void deleteByPostId(int pid) {
-//       Note to future self: Use ConcurrentHashMap for concurent deletion. tnx :> 
+//       Note to future self: Use ConcurrentLinkedList for concurent deletion. tnx :> 
         Iterator<Comment> iterator = model.iterator();
         while (iterator.hasNext()) {
            Comment comment = iterator.next();
