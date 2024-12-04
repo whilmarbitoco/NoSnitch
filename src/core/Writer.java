@@ -42,7 +42,7 @@ public class Writer<T extends Serializable> {
     }
 
     protected String getPath() {
-        return System.getProperty("user.dir") + "/src/models/data/" + modelName + ".ser";
+        return System.getProperty("user.dir") + "/src/storage/" + modelName + ".ser";
     }
     
 }
