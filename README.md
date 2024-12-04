@@ -28,10 +28,6 @@ NoSnitch promotes a safe and judgment-free digital environment for students to e
 
 ---
 
-🌈 **Happy posting, and remember: No snitching! 🤫**
-
----
-
 ## MVC Architecture
 
 The **Model-View-Controller (MVC)** architecture is implemented in the NoSnitch project to separate the logic, presentation, and user interaction layers. Here's how each part is defined:
@@ -152,3 +148,8 @@ src/
 4. **`models/`**: Contains the data models representing different entities in the system, like `Post`, `Comment`, `User`, and `Session`. Also includes serialized data files (`.ser`) to store the application's state.
 5. **`nosnitch/`**: Likely houses a specialized feature or service for the platform (`NoSnitch.java`).
 6. **`views/`**: Stores Java classes and form files that define the user interface, such as login, sign-up, and post management.
+
+
+---
+🌈 **Happy posting, and remember: No snitching! 🤫**
+
