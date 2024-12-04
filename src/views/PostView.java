@@ -16,7 +16,6 @@ public class PostView extends javax.swing.JPanel {
         this.postData = post;
         this.anon.setText(post.anon);
         this.date.setText(TimeHelper.parse(post.date));
-        System.out.println("<html>" + post.post + "</html>");
 
         this.post.setText("<html>"+ post.post +"</html>");
     }

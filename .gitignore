@@ -1,3 +1,2 @@
 build/
-*.ser
-
+src/models/data/*

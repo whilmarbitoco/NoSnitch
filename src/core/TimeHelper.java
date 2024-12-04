@@ -15,13 +15,13 @@ public class TimeHelper {
         long days = hours / 24;
 
         if (seconds < 60) {
-            return seconds + " seconds ago";
+            return seconds > 1 ? (seconds + " seconds ago") : (seconds + " second ago");
         } else if (minutes < 60) {
-            return minutes + " minutes ago";
+            return minutes > 1 ? (minutes + " minutes ago") : (minutes + " minute ago");
         } else if (hours < 24) {
-            return hours + " hours ago";
+            return hours > 1 ? (hours + " hours ago") : (hours + " hour ago");
         } else {
-            return days + " days ago";
+            return days > 1 ? (days + " days ago") : (days + " day ago");
         }
         
     }
