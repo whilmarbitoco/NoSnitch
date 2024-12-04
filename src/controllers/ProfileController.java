@@ -2,6 +2,7 @@ package controllers;
 
 import core.Auth;
 import core.Prompt;
+import core.Validator;
 import java.util.LinkedList;
 import javax.swing.JFrame;
 import models.Models;
@@ -66,6 +67,11 @@ public class ProfileController extends Controller<ProfileView> {
         
         if (post == null) {
             Prompt.error(view, "Something went wrong...", "Error");
+            return;
+        }
+        
+        if (Validator.wordCount(editPost, 80)) {
+            Prompt.error(view, "Post is limited to 80 words only", "Cannot Post");
             return;
         }
         

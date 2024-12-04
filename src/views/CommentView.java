@@ -1,26 +1,20 @@
 package views;
 
 import controllers.CommentController;
+import core.TimeHelper;
 import models.Comment;
 
 
 public class CommentView extends javax.swing.JPanel {
 
-    Comment commentData;
-    CommentController controller;
-    
     public CommentView(Comment comment, String anon) {
         initComponents();
         
-        this.commentData = comment;
         this.anon.setText(anon);
-        this.date.setText(comment.date.toString());
-        this.comment.setText(comment.comment);
+        this.date.setText(TimeHelper.parse(comment.date));
+        this.comment.setText("<html>" + comment.comment + "</html>");
     }
     
-    public void setController(CommentController controller) {
-        this.controller = controller;
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,7 +26,7 @@ public class CommentView extends javax.swing.JPanel {
         comment = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(229, 229, 229));
-        setMaximumSize(new java.awt.Dimension(930, 100));
+        setMaximumSize(new java.awt.Dimension(930, 160));
         setPreferredSize(new java.awt.Dimension(400, 100));
 
         jPanel2.setBackground(new java.awt.Color(240, 240, 240));

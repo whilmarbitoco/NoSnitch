@@ -2,6 +2,7 @@ package controllers;
 
 import core.Auth;
 import core.Prompt;
+import core.Validator;
 import models.Models;
 import models.User;
 import views.LoginView;
@@ -28,12 +29,12 @@ public class LoginController extends Controller<LoginView>{
     
     public void login(String email, String password) {
         
-        if (!Auth.validateEmail(email)) {
+        if (!Validator.email(email)) {
             Prompt.error(view, "Invalid Email", "Login Failed");
             return;   
         }
         
-        if (!Auth.validatePassword(password)) {
+        if (Validator.password(password)) {
             Prompt.error(view, "Password must be 4 characters long", "Login Failed");            
             return;   
         }

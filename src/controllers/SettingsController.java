@@ -2,6 +2,7 @@ package controllers;
 
 import core.Auth;
 import core.Prompt;
+import core.Validator;
 import models.Models;
 import views.ChangePassView;
 import views.SettingsView;
@@ -36,7 +37,7 @@ public class SettingsController extends Controller<SettingsView>{
             return;
         }
         
-        if (!Auth.validateEmail(email)) {
+        if (!Validator.email(email)) {
             Prompt.error(view, "Invalid Email", "Update Failed");
             return;
         }

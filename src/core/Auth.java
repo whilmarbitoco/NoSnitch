@@ -26,19 +26,4 @@ public class Auth {
         userSession = new Session();
         return userSession;
     }
-    
-    public static boolean validatePassword(String password) {
-        return validateText(4, password);
-    }
-    
-    public static boolean validateText(int length, String text) {
-        return text.length() >= length;
-    }
-    
-    public static boolean validateEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-     
-        return email.matches(emailRegex);
-    }
-    
 }

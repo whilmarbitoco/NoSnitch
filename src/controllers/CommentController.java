@@ -2,6 +2,7 @@ package controllers;
 
 import core.Auth;
 import core.Prompt;
+import core.Validator;
 import models.Comment;
 import models.Models;
 import models.Post;
@@ -46,8 +47,8 @@ public class CommentController extends Controller<CommentsView>{
             return;
         }
         
-        if (Auth.validateText(50, comment)) {
-            Prompt.error(view, "Comment is limited to 50 characters only", "Cannot Comment");
+        if (Validator.wordCount(comment, 50)) {
+            Prompt.error(view, "Comment is limited to 50 words only", "Cannot Comment");
             return;
         }
         

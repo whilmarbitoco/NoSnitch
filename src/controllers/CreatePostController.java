@@ -2,6 +2,7 @@ package controllers;
 
 import core.Auth;
 import core.Prompt;
+import core.Validator;
 import models.Models;
 import models.Post;
 import views.CreatePostView;
@@ -38,8 +39,8 @@ public class CreatePostController extends Controller<CreatePostView> {
             return;
         }
         
-        if (Auth.validateText(80, post)) {
-            Prompt.error(view, "Post is limited to 80 characters only", "Cannot Post");
+        if (Validator.wordCount(post, 80)) {
+            Prompt.error(view, "Post is limited to 80 words only", "Cannot Post");
             return;
         }
        

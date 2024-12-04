@@ -1,7 +1,7 @@
 package models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 
@@ -24,7 +24,7 @@ public class Comment extends Model<Comment> implements Serializable{
         this.userId = userId;
         this.anonId = anonId;
         this.comment = comment;
-        date = LocalDate.now();
+        date = LocalDateTime.now();
     }
     
     public LinkedList<Comment> getPostComment(int postId) {

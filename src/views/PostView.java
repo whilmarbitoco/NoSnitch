@@ -1,6 +1,7 @@
 package views;
 
 import controllers.HomeController;
+import core.TimeHelper;
 import models.Post;
 
 
@@ -14,8 +15,10 @@ public class PostView extends javax.swing.JPanel {
         
         this.postData = post;
         this.anon.setText(post.anon);
-        this.date.setText(post.date.toString());
-        this.post.setText(post.post);
+        this.date.setText(TimeHelper.parse(post.date));
+        System.out.println("<html>" + post.post + "</html>");
+
+        this.post.setText("<html>"+ post.post +"</html>");
     }
     
     public void setController(HomeController controller) {
@@ -33,7 +36,7 @@ public class PostView extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(229, 229, 229));
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        setMaximumSize(new java.awt.Dimension(930, 100));
+        setMaximumSize(new java.awt.Dimension(930, 170));
         setPreferredSize(new java.awt.Dimension(400, 100));
 
         jPanel2.setBackground(new java.awt.Color(240, 240, 240));

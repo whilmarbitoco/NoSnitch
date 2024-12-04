@@ -2,11 +2,10 @@ package views;
 
 import controllers.CommentController;
 import core.Auth;
-import java.util.LinkedList;
+import core.TimeHelper;
 import javax.swing.DefaultComboBoxModel;
 import models.Comment;
 import models.Post;
-import models.User;
 
 
 public class CommentsView extends javax.swing.JFrame {
@@ -23,11 +22,11 @@ public class CommentsView extends javax.swing.JFrame {
     }
     
     public void setData(Post post) {
-        this.post.setText(post.post);
         this.anon.setText(post.anon);
-        this.date.setText(post.date.toString());
+        this.date.setText(TimeHelper.parse(post.date));
         this.postName.setText("post/post#" + post.id);
         
+        userPost.setText("<html>" + post.post + "</html>");
         String[] items = {Auth.user.username, "Settings", "Logout"};
         DefaultComboBoxModel comboModel = new DefaultComboBoxModel(items);
         combo.setModel(comboModel);
@@ -63,7 +62,7 @@ public class CommentsView extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         date = new javax.swing.JLabel();
         anon = new javax.swing.JLabel();
-        post = new javax.swing.JLabel();
+        userPost = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         commentInput = new javax.swing.JTextField();
@@ -101,7 +100,7 @@ public class CommentsView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 555, Short.MAX_VALUE)
                 .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -244,6 +243,9 @@ public class CommentsView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(scroll);
 
         postContainer.setBackground(new java.awt.Color(240, 240, 240));
+        postContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        postContainer.setMaximumSize(new java.awt.Dimension(32, 32767));
+        postContainer.setPreferredSize(new java.awt.Dimension(21, 182));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -276,8 +278,11 @@ public class CommentsView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        post.setText("jLabel1");
-        post.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        userPost.setFont(new java.awt.Font("FreeSans", 0, 13)); // NOI18N
+        userPost.setForeground(new java.awt.Color(0, 0, 0));
+        userPost.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        userPost.setText("jLabel3");
+        userPost.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout postContainerLayout = new javax.swing.GroupLayout(postContainer);
         postContainer.setLayout(postContainerLayout);
@@ -286,7 +291,7 @@ public class CommentsView extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(postContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(post, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         postContainerLayout.setVerticalGroup(
@@ -294,8 +299,8 @@ public class CommentsView extends javax.swing.JFrame {
             .addGroup(postContainerLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(userPost, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -362,7 +367,7 @@ public class CommentsView extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(postName)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
-                        .addComponent(postContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(postContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
                     .addComponent(jLabel1))
                 .addContainerGap(239, Short.MAX_VALUE))
         );
@@ -375,14 +380,13 @@ public class CommentsView extends javax.swing.JFrame {
                     .addGroup(containerLayout.createSequentialGroup()
                         .addComponent(postName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(postContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
-                        .addGap(342, 342, 342))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(containerLayout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -391,11 +395,11 @@ public class CommentsView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -467,9 +471,9 @@ public class CommentsView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel post;
     private javax.swing.JPanel postContainer;
     private javax.swing.JLabel postName;
     private javax.swing.JPanel scroll;
+    private javax.swing.JLabel userPost;
     // End of variables declaration//GEN-END:variables
 }

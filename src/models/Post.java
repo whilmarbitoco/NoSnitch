@@ -1,7 +1,7 @@
 package models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -27,7 +27,7 @@ public class Post extends Model<Post> implements Serializable{
         this.anon = anon;
         this.board = board;
         this.post = post;
-        this.date = LocalDate.now();
+        this.date = LocalDateTime.now();
     }
     
     

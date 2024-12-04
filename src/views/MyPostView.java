@@ -1,6 +1,7 @@
 package views;
 
 import controllers.ProfileController;
+import core.TimeHelper;
 import models.Post;
 
 
@@ -13,8 +14,8 @@ public class MyPostView extends javax.swing.JPanel {
         initComponents();
         
         this.postData = post;
-        this.date.setText(post.date.toString());
-        this.post.setText(post.post);
+        this.date.setText(TimeHelper.parse(post.date));
+        this.post.setText("<html>" + post.post + "</html>");
     }
     
     public void setController(ProfileController controller) {
@@ -33,7 +34,7 @@ public class MyPostView extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(229, 229, 229));
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        setMaximumSize(new java.awt.Dimension(930, 100));
+        setMaximumSize(new java.awt.Dimension(930, 170));
         setPreferredSize(new java.awt.Dimension(400, 100));
 
         jPanel2.setBackground(new java.awt.Color(240, 240, 240));
@@ -93,6 +94,7 @@ public class MyPostView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        post.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         post.setText("jLabel3");
         post.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 

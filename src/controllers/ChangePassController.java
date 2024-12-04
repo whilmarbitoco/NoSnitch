@@ -3,6 +3,7 @@ package controllers;
 
 import core.Auth;
 import core.Prompt;
+import core.Validator;
 import javax.swing.JFrame;
 import models.Models;
 import views.ChangePassView;
@@ -34,7 +35,7 @@ public class ChangePassController extends Controller<ChangePassView>{
             return;
         }
         
-        if (Auth.validatePassword(newPass)) {
+        if (Validator.password(newPass)) {
             Prompt.error(view, "Password Length Invalid", "Update Failed");
             return;            
         }

@@ -1,7 +1,7 @@
 package models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Session extends Model<Session> implements Serializable{
     
@@ -17,7 +17,7 @@ public class Session extends Model<Session> implements Serializable{
 
     public Session(User user) {
         this.user = user;
-        date = LocalDate.now();
+        date = LocalDateTime.now();
     }
     
     public void createSession(User user) {

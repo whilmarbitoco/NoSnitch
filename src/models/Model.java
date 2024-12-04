@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 
@@ -16,7 +16,7 @@ abstract class Model<T extends Model> implements Serializable{
     LinkedList<T> model;
     public String modelName;
     public int id;
-    public LocalDate date;
+    public LocalDateTime date;
     
     public Model() {
         this.model = new LinkedList<>();
@@ -73,7 +73,7 @@ abstract class Model<T extends Model> implements Serializable{
     
     public void clean() {
         load();
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
 
         for (T p : model) {
             if (!p.date.isAfter(now.minusDays(2))) {

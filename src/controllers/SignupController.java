@@ -1,7 +1,7 @@
 package controllers;
 
-import core.Auth;
 import core.Prompt;
+import core.Validator;
 import models.Models;
 import models.User;
 import views.SignUpView;
@@ -24,13 +24,13 @@ public class SignupController extends Controller<SignUpView>{
     
     public void signup(String email, String username, String password, String confirmPassword) {
         
-        if (!Auth.validateEmail(email)) {
+        if (!Validator.email(email)) {
             Prompt.error(view, "Invalid Email", "Sign Up Failed");            
             return;   
         }
         
-        if (!Auth.validatePassword(password)) {
-            Prompt.error(view, "Password must be 4 characters long", "Sign Up Failed");            
+        if (!Validator.password(password)) {
+            Prompt.error(view, "Password must be 5 characters long", "Sign Up Failed");            
             return;   
         }
         
