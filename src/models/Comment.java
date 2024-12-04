@@ -2,6 +2,7 @@ package models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 
@@ -49,6 +50,18 @@ public class Comment extends Model<Comment> implements Serializable{
         }
         
         return res;
+    }
+    
+    public void deleteByPostId(int pid) {
+//       Note to future self: Use ConcurrentHashMap for concurent deletion. tnx :> 
+        Iterator<Comment> iterator = model.iterator();
+        while (iterator.hasNext()) {
+           Comment comment = iterator.next();
+           if (comment.postId == pid) {
+               iterator.remove();
+           }
+       }
+        save();
     }
     
    

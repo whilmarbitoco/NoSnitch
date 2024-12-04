@@ -34,8 +34,8 @@ public class LoginController extends Controller<LoginView>{
             return;   
         }
         
-        if (Validator.password(password)) {
-            Prompt.error(view, "Password must be 4 characters long", "Login Failed");            
+        if (!Validator.password(password)) {
+            Prompt.error(view, "Password must be 5 characters long", "Login Failed");            
             return;   
         }
         

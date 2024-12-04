@@ -35,7 +35,7 @@ public class ChangePassController extends Controller<ChangePassView>{
             return;
         }
         
-        if (Validator.password(newPass)) {
+        if (!Validator.password(newPass)) {
             Prompt.error(view, "Password Length Invalid", "Update Failed");
             return;            
         }

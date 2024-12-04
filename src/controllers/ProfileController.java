@@ -53,6 +53,7 @@ public class ProfileController extends Controller<ProfileView> {
         }
         
         models.post.deleteById(id);
+        models.comment.deleteByPostId(id);
         setPosts();
     }
     
