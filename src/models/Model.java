@@ -4,6 +4,7 @@ import core.Writer;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+import java.util.Random;
 
 
 abstract class Model<T extends Model> extends Writer<T> implements Serializable{
@@ -62,7 +63,7 @@ abstract class Model<T extends Model> extends Writer<T> implements Serializable{
     }
     
     public int generateId() {
-        return (int) (Math.random() * Integer.MAX_VALUE) % 3872;
+          return Math.abs(new Random().nextInt());
     }
     
     public void clean() {
