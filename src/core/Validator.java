@@ -6,8 +6,8 @@ public class Validator {
         return words.split(" ").length > count;
     }
     
-    public static boolean textCount(String text, int count) {
-        return text.length() > count;
+    public static boolean texLen(String text, int count) {
+        return text.strip().length() > count;
     }
     
     public static boolean email(String email) {
@@ -16,7 +16,7 @@ public class Validator {
     }
     
     public static boolean password(String password) {
-        return textCount(password, 5);
+        return texLen(password, 5);
     }
     
 }
